@@ -1,0 +1,275 @@
+:root {
+  --sky-top: #7dd3fc;
+  --sky-mid: #bfdbfe;
+  --sky-bottom: #fef3c7;
+  --panel: rgba(15, 23, 42, 0.65);
+  --panel-border: rgba(255, 255, 255, 0.18);
+  --text: #f8fafc;
+  --soft: #dbeafe;
+  --accent: #f472b6;
+  --accent-2: #f9a8d4;
+  --gold: #fbbf24;
+  --shadow: rgba(15, 23, 42, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-mid), var(--sky-bottom));
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+button {
+  font: inherit;
+}
+
+.game-shell {
+  width: min(900px, 100%);
+  background: rgba(15, 23, 42, 0.2);
+  border: 1px solid var(--panel-border);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px var(--shadow);
+  backdrop-filter: blur(8px);
+  padding: 22px;
+}
+
+.topbar,
+.hud,
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.topbar {
+  margin-bottom: 18px;
+}
+
+.label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+h1 {
+  margin: 8px 0 0;
+  font-size: clamp(1.8rem, 2vw, 2.8rem);
+  letter-spacing: 0.03em;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  box-shadow: 0 12px 25px rgba(244, 114, 182, 0.35);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.hud {
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+.stat-card strong {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.game-area {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: linear-gradient(180deg, rgba(125, 211, 252, 0.75), rgba(191, 219, 254, 0.35) 50%, rgba(254, 243, 199, 0.3));
+}
+
+.sky-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top center, rgba(255, 255, 255, 0.4), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.25), transparent 30%);
+  pointer-events: none;
+}
+
+.butterfly-container {
+  position: absolute;
+  inset: 0;
+}
+
+.butterfly {
+  --wing-color-a: #f472b6;
+  --wing-color-b: #f9a8d4;
+  --wing-color-c: #fef3c7;
+  position: absolute;
+  width: 72px;
+  height: 52px;
+  cursor: pointer;
+  user-select: none;
+  animation: hover 0.7s ease-in-out infinite alternate;
+  transition: transform 0.15s ease;
+}
+
+.butterfly:hover {
+  transform: scale(1.08);
+}
+
+.butterfly.dead {
+  opacity: 0;
+  transform: scale(1.6);
+  pointer-events: none;
+}
+
+.butterfly .wing {
+  position: absolute;
+  width: 28px;
+  height: 34px;
+  top: 8px;
+  border-radius: 60% 40% 70% 30% / 60% 35% 65% 40%;
+  background: linear-gradient(135deg, var(--wing-color-b), var(--wing-color-a));
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 0 12px rgba(255,255,255,0.35);
+}
+
+.butterfly .wing::before {
+  content: "";
+  position: absolute;
+  inset: 7px 8px 8px 8px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12));
+}
+
+.butterfly .wing.left {
+  left: 6px;
+  transform: rotate(-18deg);
+}
+
+.butterfly .wing.right {
+  right: 6px;
+  transform: rotate(18deg) scaleX(-1);
+}
+
+.butterfly .body {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  width: 8px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1f2937, #111827);
+  transform: translateX(-50%);
+}
+
+.butterfly .body::before,
+.butterfly .body::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 14px;
+  background: rgba(17, 24, 39, 0.8);
+  border-radius: 999px;
+  top: -10px;
+}
+
+.butterfly .body::before {
+  left: -3px;
+  transform: rotate(-24deg);
+}
+
+.butterfly .body::after {
+  right: -3px;
+  transform: rotate(24deg);
+}
+
+@keyframes hover {
+  from {
+    transform: translateY(0) rotate(-2deg);
+  }
+  to {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+.controls {
+  margin-top: 18px;
+}
+
+#message {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .game-shell {
+    padding: 16px;
+  }
+
+  .topbar,
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hud {
+    gap: 10px;
+  }
+
+  .game-area {
+    height: 420px;
+  }
+}

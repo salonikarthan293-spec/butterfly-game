@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Butterfly Garden</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-shell">
+      <header class="topbar">
+        <div>
+          <p class="label">Butterfly Garden</p>
+          <h1>Catch the butterflies!</h1>
+        </div>
+        <button id="startBtn" class="primary-btn">Start Game</button>
+      </header>
+
+      <section class="hud">
+        <div class="stat-card">
+          <span class="stat-label">Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Time</span>
+          <strong id="time">30</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Best</span>
+          <strong id="bestScore">0</strong>
+        </div>
+      </section>
+
+      <main id="gameArea" class="game-area" aria-label="Game area">
+        <div class="sky-glow"></div>
+        <div id="butterflyContainer" class="butterfly-container"></div>
+      </main>
+
+      <footer class="controls">
+        <button id="pauseBtn" class="secondary-btn">Pause</button>
+        <p id="message">Tap the butterflies before time runs out.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
